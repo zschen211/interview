@@ -12,17 +12,17 @@ e. TCP传输的开销更大且速度较慢， 而UDP传输开销小且速度快
 
 TCP Header（20到60字节）  
 
-<img src="https://github.com/zschen211/interview/tree/main/image/tcp header.png" alt="alt text" style="zoom:65%;" align="left"/>
+<img src="./image/tcp header.png" alt="alt text" style="zoom:65%;" align="left"/>
 
 UDP Header（8字节）
 
-<img src="https://github.com/zschen211/interview/tree/main/image/udp header.gif" alt="alt text" style="zoom:67%;" align="left"/>
+<img src="./image/udp header.gif" alt="alt text" style="zoom:67%;" align="left"/>
 
 
 
 ## **3. TCP 三次握手**
 
-<img src="https://github.com/zschen211/interview/tree/main/image/tcp 3way handshake.jpeg" alt="alt text" style="zoom:67%;" align="left"/>
+<img src="./image/tcp 3way handshake.jpeg" alt="alt text" style="zoom:67%;" align="left"/>
 
 **SYN**：客户端发起TCP连接请求，将SYN bit设置成1，选择初始序列号 seq = x，将消息发送给服务器   
 
@@ -39,7 +39,7 @@ UDP Header（8字节）
 
 ## **4. TCP四次挥手**
 
-<img src="https://github.com/zschen211/interview/tree/main/image/tcp 4way handwave.jpeg" alt="alt text" style="zoom:67%;" align="left"/>
+<img src="./image/tcp 4way handwave.jpeg" alt="alt text" style="zoom:67%;" align="left"/>
 
 **为什么TCP挥手需要4次：**  
 当一台主机准备断开TCP连接并发起FIN消息时，另一台主机仍可能有消息没传递完，因此接收方需要在
@@ -100,7 +100,7 @@ RTT（round-trip time）动态计算超时重传的timeout值（RTO：retransmis
 **e. 流量控制**：如果接收方的缓冲区空间不够，而同时发送方持续不断的发送消息，则会导致多条信息丢包，并导致
 后续的一系列超时重传。因此TCP利用滑动窗口对信息传输进行了流量控制。
 
-<img src="https://github.com/zschen211/interview/tree/main/image/tcp flow control.jpeg" alt="alt text" style="zoom:100%;" align="left"/>
+<img src="./image/tcp flow control.jpeg" alt="alt text" style="zoom:100%;" align="left"/>
 
 接收方在发送ACK信息的时候，会在头部Window size字段指定窗口的大小，窗口的大小又发送方的缓冲区大小
 及接收方的缓冲区大小决定，窗口大小越大表示发送方下次能传输的消息大小越大。这一设计使得接收方能根据
@@ -110,7 +110,7 @@ RTT（round-trip time）动态计算超时重传的timeout值（RTO：retransmis
 **f. 拥塞控制**：TCP拥塞控制的目的是在避免拥塞的前提下，使数据尽可能快地传输。这一机制既保证了传输的可靠性
 也维护了传输的高效性。
 
-<img src="https://github.com/zschen211/interview/tree/main/image/tcp congestion control.jpeg" alt="alt text" style="zoom:80%;" align="left"/>
+<img src="./image/tcp congestion control.jpeg" alt="alt text" style="zoom:80%;" align="left"/>
 
 **当服务器收到ACK时**：
 持续收到ACK意味着传输通道是通畅的，这时cwnd（congested window）应该增大以更大程度地利用网络资源，
@@ -136,7 +136,7 @@ TCP Reno是TCP算法实现的一个版本，在TCP Reno版本中有**快重传**
 
 **a. Nagle算法**：Nagle算法通过减少消息的发送量来提升网络利用率
 
-<img src="https://github.com/zschen211/interview/tree/main/image/nagle algorithm.png" alt="alt text" style="zoom:50%;" align="left"/>
+<img src="./image/nagle algorithm.png" alt="alt text" style="zoom:50%;" align="left"/>
 
 Nagle算法处理了发送包太小的问题，这一算法会将多个体积小的包重组成一个较大的包并一次性发送出去
 
