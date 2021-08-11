@@ -130,7 +130,44 @@ Nagle算法处理了发送包太小的问题，这一算法会将多个体积小
 
 
 
+# HTTP
 
+
+
+## HTTP状态码
+
+<img src="C:\Users\tony0\Desktop\interview\Computer-Network\Image\http status code.jpg" style="zoom:80%;" align="left"/>
+
+**1XX**：
+
+1. 100 Continue：目前为止一切正常，客户端可以继续发请求或者忽略此响应
+
+**2XX**：
+
+1. 200 OK：请求成功
+
+**3XX**：
+
+1. 301 Moved Permanently：永久重定向
+2. 302 Found：临时重定向
+
+**4XX**：
+
+1. 400 Bad Request：请求中出现语法错误
+2. 401 Unauthorized：客户端请求需要带验证信息。如果之前进行过请求则表示认证失败
+3. 403 Forbidden：客户端没有权限访问请求资源
+4. 404 Not Found：服务器无法找到请求资源
+
+**5XX**：
+
+1. 500 Internal Server Error：服务器在执行请求时发生错误
+2. 503 Service Unavailable：服务器还没准备好响应请求。通常是因为服务器过载或者处于维修状态中。
+
+（301和302的区别：301代表URL永久性转移，302代表URL暂时性转移）
+
+
+
+## Forward和Redirect的区别
 
 
 
