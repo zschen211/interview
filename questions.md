@@ -4,13 +4,31 @@
 
 https://www.interviewcake.com/sorting-algorithm-cheat-sheet
 
+**外排序、桶排序**
 
+https://zh.wikipedia.org/wiki/%E5%A4%96%E6%8E%92%E5%BA%8F
 
+https://en.wikipedia.org/wiki/Bucket_sort
 
+**哈希映射**
+
+https://www.jianshu.com/p/fa57d21b9ad7
 
 # 操作系统
 
+**进程、线程、协程**
 
+https://xie.infoq.cn/article/6f306c7113545609a2cb75231
+
+**CPU调度算法**
+
+https://cs241.cs.illinois.edu/coursebook/Scheduling#scheduling-algorithms
+
+**进程通讯方式**
+
+**内存段页式**
+
+**常用Linux指令**
 
 # 数据库系统
 
@@ -30,9 +48,9 @@ https://www.cnblogs.com/rickiyang/p/13841811.html
 
 https://www.cnblogs.com/rickiyang/p/13856388.html
 
+**常用数据库指令**
 
-
-# 计算机网络
+# 计算机网络与网络安全
 
 **HTTP和RPC的区别**
 
@@ -54,9 +72,17 @@ https://zhuanlan.zhihu.com/p/32059190
 
 https://zhuanlan.zhihu.com/p/108822858
 
+**HTTPS和HTTP的区别**
 
+https://www.runoob.com/w3cnote/http-vs-https.html
 
-# 网络安全
+**HTTPS加密过程（SSL/TLS握手）**
+
+https://www.ibm.com/docs/en/ibm-mq/7.5?topic=ssl-overview-tls-handshake
+
+**DNS原理**
+
+https://www.cloudflare.com/zh-cn/learning/dns/what-is-dns/
 
 
 
@@ -72,6 +98,14 @@ https://raft.github.io/raft.pdf
 
 
 
+# 大数据处理与系统设计
+
+**topK问题**
+
+https://zhuanlan.zhihu.com/p/119385223
+
+https://levelup.gitconnected.com/patterns-for-coding-interviews-top-k-elements-1a1368c4cbf0
+
 # Go语言
 
 
@@ -80,4 +114,7 @@ https://raft.github.io/raft.pdf
 
 1. 数组中最大的k个数
 2. 整数反转
+3. 二叉树的前序遍历
+4. 数组中未出现的最小正整数
+5. 交换链表中指定位置的两个节点
 
