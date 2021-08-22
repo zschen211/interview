@@ -10,9 +10,9 @@ https://zh.wikipedia.org/wiki/%E5%A4%96%E6%8E%92%E5%BA%8F
 
 https://en.wikipedia.org/wiki/Bucket_sort
 
-**哈希映射**
+**哈希表**
 
-https://www.jianshu.com/p/fa57d21b9ad7
+https://www.cnblogs.com/hunternet/p/11324945.html
 
 # 操作系统
 
@@ -24,11 +24,21 @@ https://xie.infoq.cn/article/6f306c7113545609a2cb75231
 
 https://cs241.cs.illinois.edu/coursebook/Scheduling#scheduling-algorithms
 
-**进程通讯方式**
+**进程通信IPC**
 
-**内存段页式**
+https://cs241.cs.illinois.edu/coursebook/Ipc#mmap
+
+https://zhuanlan.zhihu.com/p/345749594
+
+https://zhuanlan.zhihu.com/p/37891272
+
+**内存管理**
+
+https://github.com/CyC2018/CS-Notes/blob/master/notes/%E8%AE%A1%E7%AE%97%E6%9C%BA%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%20-%20%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86.md#%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98
 
 **常用Linux指令**
+
+https://segmentfault.com/a/1190000009532290
 
 # 数据库系统
 
@@ -40,6 +50,10 @@ https://zhuanlan.zhihu.com/p/117476959
 
 https://zhuanlan.zhihu.com/p/98465611
 
+**数据库索引**
+
+
+
 **Mysql Binlog**
 
 https://www.cnblogs.com/rickiyang/p/13841811.html
@@ -47,8 +61,6 @@ https://www.cnblogs.com/rickiyang/p/13841811.html
 **Mysql主从容灾**
 
 https://www.cnblogs.com/rickiyang/p/13856388.html
-
-**常用数据库指令**
 
 # 计算机网络与网络安全
 
@@ -117,4 +129,5 @@ https://levelup.gitconnected.com/patterns-for-coding-interviews-top-k-elements-1
 3. 二叉树的前序遍历
 4. 数组中未出现的最小正整数
 5. 交换链表中指定位置的两个节点
+6. 两个排序数组中找第k大的数
 
