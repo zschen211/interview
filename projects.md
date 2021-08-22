@@ -89,9 +89,34 @@
 
 
 
-#### 时间戳排序
+#### 时间戳排序协议（T/O）
 
+T/O（时间戳排序）协议是乐观锁的一种实现。T/O协议是一种无锁的协议，它在读写操作时不会给对象加读写锁，并且从时间上后发起的事物不会等待先发事物结束，这一性质使得T/O协议默认不存在死锁的问题。T/O协议的隔离等级为read committed（因为事物每次做读操作都会读取最新提交的值，因此并不能做到repeatable read）
 
+**读写冲突**：
+
+T/O协议的读写冲突是通过协议中的读写规则判断并解决，如果出现序列冲突事物会默认自动中断并回滚。T/O协议为每个事物按时间顺序分配了一个id，id大的事物有更高的读写优先级。T/O协议保证了以下两点的正确性，假设有一条事物T和对象O：
+
+1. **write限制**：T的id必须大于等于所有其余对O进行过读或写操作的事物id
+2. **read限制**：T的id必须大于上次写入并提交O的事物id
+
+**存储对象维护的变量**：
+
+1. **提交值**：对象的最新值
+2. **提交id**：最新提交和修改了对象的事物id
+3. **读id列表（Read timestamp list）**：存储所有进行过读操作的事物id的列表（提交或回滚过的事物id会被抛出）
+4. **暂定写列表（Tentative write list）**：存储所有进行过写操作的（事物id，value）元组的列表（提交或回滚过的元素会被抛出）
+
+**读写规则**：
+
+<img src="/Users/zhoushichen/Desktop/interview/Distributed-System/image/t:o read rule.png" alt="t:o read rule" style="zoom:30%;"/>
+
+<img src="/Users/zhoushichen/Desktop/interview/Distributed-System/image/t:o write rule.png" alt="t:o write rule" style="zoom:30%;" />
+
+**T/O协议的缺陷**：
+
+1. 当对象存储的值非常占空间时，维护RW列表的开销非常大
+2. 运行时间久的事物更容易被中断回滚，因为读到后发起的事物的提交值的概率增加了
 
 ***Reference***：
 
@@ -99,13 +124,47 @@
 
 
 
-##### 事物（ACID）实现
+#### Innodb事物隔离级别
 
-##### 事物隔离
+Innodb有四种隔离级别，隔离级别越高代表隔离性越好，并行性越差，四种隔离级别分别为：
 
-##### 死锁
+<img src="/Users/zhoushichen/Desktop/interview/Database-System/Image/isolation level.webp" alt="isolation level" style="zoom:70%;" />
 
-##### 一致性哈希
+1. Read uncommitted：事物会读到未提交的值
+2. Read committed：事物只能读已提交的值，解决脏读
+3. Repeatable read：事物多次读同一对象值的结果相同，解决不可重复读（mvcc+间隙锁也能解决幻读）
+4. Serializable：序列化执行事物，解决幻读
+
+
+
+#### Innodb事物实现
+
+Innodb实现事务需要保证ACID特性的正确性，事务实现主要从这四个特性出发并逐一解决
+
+**Atomicity原子性**：Innodb的原子性是通过undo log实现的，客户端输入修改数据的sql语句时，undo log会生成一个对应的回退语句（如insert对应delete）。如果事务违反了其他特性约束并需要回滚时，undo log中的sql语句会被执行，用于回滚操作。
+
+**Consistency一致性**：
+
+
+
+#### 死锁
+
+死锁是一种由于进程占有资源并等待其余进程释放所申请资源时而造成的永久阻塞问题。**死锁的产生有四个必要条件**，分别是：
+
+1. 占有并等待：进程在占有资源时可以申请并等待其他资源
+2. 互斥：单一资源仅可被一个进程所占有，不能出现多个进程占有同一资源的情况
+3. 非抢占式：进程不能抢占其它进程的资源，资源必须由进程主动释放
+4. 循环等待：在进程资源请求的有向图中出现了环
+
+**处理死锁的方法**：
+
+1. **无视死锁**：又称鸵鸟算法，当死锁产生概率非常小时并且处理死锁所需开销非常大时，可以直接采取无视死锁的方法
+2. **死锁检测**：死锁检测允许死锁的发生，并在死锁发生后通过强制进程释放资源的方式解决死锁。
+3. **死锁预防**：死锁预防通过防止死锁的四个必要条件的满足，解决死锁问题
+
+***Reference***：
+
+https://cs241.cs.illinois.edu/coursebook/Deadlock#approaches-to-solving-livelock-and-deadlock
 
 
 
@@ -132,6 +191,8 @@
 ##### RPC
 
 ##### 日志一致性算法（Paxos、Raft）
+
+**一致性哈希**
 
 
 
