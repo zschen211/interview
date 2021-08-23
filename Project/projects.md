@@ -193,7 +193,9 @@ https://cs241.cs.illinois.edu/coursebook/Deadlock#approaches-to-solving-livelock
 
 # Raft共识算法
 
-### 项目描述
+
+
+## 项目概要
 
 1. 使用Go语言实现Raft算法，实现集群节点状态的一致性 
 2. 使用goroutine和channel完成线程同步，实现Raft领袖选举算法 
@@ -201,19 +203,27 @@ https://cs241.cs.illinois.edu/coursebook/Deadlock#approaches-to-solving-livelock
 
 
 
-### 相关知识点
+## 项目描述
 
-##### 进程、线程、协程
 
-##### GMP调度模型
 
-##### Golang垃圾回收
 
-##### RPC
 
-##### 日志一致性算法（Paxos、Raft）
 
-**一致性哈希**
+
+## 相关知识点
+
+### 进程、线程、协程
+
+### GMP调度模型
+
+### Golang垃圾回收
+
+### RPC
+
+### 日志一致性算法（Paxos、Raft）
+
+### **一致性哈希**
 
 
 
@@ -221,7 +231,9 @@ https://cs241.cs.illinois.edu/coursebook/Deadlock#approaches-to-solving-livelock
 
 # 中间人攻击
 
-### 项目描述
+
+
+## 项目概要
 
 1. 伪造ARP协议响应，使主机成为中间人以进行报文传输监控及信息篡改 
 2. 通过修改TCP传输报文中的序列号、应答号及校验和等头部信息，实现信息的篡改 
@@ -229,13 +241,42 @@ https://cs241.cs.illinois.edu/coursebook/Deadlock#approaches-to-solving-livelock
 
 
 
-### 相关知识点
+## 项目描述
 
-##### TCP/UDP
+​	中间人攻击项目实现了在虚拟的局域网中的中间人攻击。项目通过ARP欺骗是主机成为客户端和服务器之间的中间人，并在后续监控并篡改客户端接收到的HTTP信息。项目中给定的场景局域网中有三台主机，分别为攻击人主机、Web服务器、客户端，并且Web服务器和客户端默认不知道对方的MAC地址。在启动模拟场景的局域网时，Web服务器和客户端会给局域网下的所有主机发送ARP广播并试图获取Web服务器的MAC地址，这时我们作为攻击人则会不断地给两台目标主机发送ARP响应信息。当Web服务器和客户端收到ARP响应后，以为是收到了对方正确的IP-MAC地址映射，并存入本地缓存中。这一操作导致后续Web服务器和客户端之间的通信信息实际上都发送给了攻击人。攻击人此时就对双方的信息有高度的掌握，并可以随意地监控或篡改。   
 
-##### ARP欺骗
+​	由于服务器和客户端之间的传输使用了HTTP/TCP/IP的网络协议栈，因此为了保证信息正确到达接收端，在项目中我们还对HTTP（content-length）、TCP（seq、ack、checksum）、IP（total length、checksum）的头部信息进行了修改。
 
-##### HTTPS
 
-##### 加密算法
+
+## 相关知识点
+
+### TCP/UDP
+
+***Reference***：
+
+​	1.https://zhuanlan.zhihu.com/p/108822858
+
+
+
+### ARP欺骗
+
+​	ARP协议被用作获取目标主机的IP-MAC映射。当主机A已知主机B的IP地址并且想获取主机B的MAC地址时，会给局域网内的所有主机发送ARP请求广播。这时主机B接收到了ARP请求，并判断请求中的目标IP地址是自身的IP地址时，会给主机A发送ARP响应并在信息中包含了自己的MAC地址。主机A接收到主机B的信息后，会将主机B的IP-MAC映射存入本地的ARP缓存，并在过期前使用缓存中的IP-MAC地址进行通讯。
+
+​	由于ARP请求是以广播的形式发送并且局域网内所有主机都会接受到ARP请求，攻击人可以借此机会伪造一份ARP响应并污染主机A的ARP缓存。此时主机A发送给主机B的所有信息都可能被监控并篡改，信息安全受到严重危害。主流的ARP伪造方法有两种：
+
+1. 攻击人可以在接收到ARP请求以后再发送伪造响应。这种方式更加隐蔽，但是成功率大大降低，因为ARP请求在到达攻击人主机之前就可能接收到了正确的响应，请求主机也会相应的更新ARP缓存。
+2. 攻击人也可以持续无脑地广播伪造响应。这种方式隐蔽性差，并且网络资源利用率高，但是成功率高，ARP请求在被发送后很短时间内就会接到伪造的响应。
+
+***Reference***:
+
+	1. https://www.varonis.com/blog/arp-poisoning/
+
+
+
+### HTTPS
+
+
+
+### 加密算法
 
